@@ -103,7 +103,7 @@ Classe para tratamento global de erros, garantindo respostas claras e padronizad
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/api-gerenciamento-cursos.git
+   git clone https://github.com/Pedro-Hc-Reis/Desafio-Rocketseat-api-gerenciamento-cursos.git
    ```
 2. Navegue até o diretório do projeto:
    ```bash
