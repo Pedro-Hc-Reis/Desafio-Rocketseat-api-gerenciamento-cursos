@@ -99,24 +99,6 @@ Classe para tratamento global de erros, garantindo respostas claras e padronizad
 
 ---
 
-## 📦 Como Executar
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/Pedro-Hc-Reis/Desafio-Rocketseat-api-gerenciamento-cursos.git
-   ```
-2. Navegue até o diretório do projeto:
-   ```bash
-   cd api-gerenciamento-cursos
-   ```
-3. Compile e execute o projeto:
-   ```bash
-   mvn spring-boot:run
-   ```
-4. Acesse a API em: [http://localhost:8080](http://localhost:8080)
-
----
-
 ## 🙌 Contribuição
 
 Fique à vontade para contribuir com melhorias ou sugestões. Para isso:
