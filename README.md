@@ -89,7 +89,7 @@ Classe para tratamento global de erros, garantindo respostas claras e padronizad
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Java 17**
+- **Java 21**
 - **Spring Boot**
 - **Spring Data JPA**
 - **H2 Database** (banco de dados em memória para desenvolvimento)
