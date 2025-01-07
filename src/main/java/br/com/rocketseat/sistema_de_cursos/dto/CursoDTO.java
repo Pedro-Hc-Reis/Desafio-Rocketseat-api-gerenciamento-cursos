@@ -11,4 +11,7 @@ public class CursoDTO {
 
     @NotBlank ( message = "A categoria é obrigatória" )
     private String category;
+
+    @NotBlank ( message = "O professor é obrigatório" )
+    private String teacher;
 }

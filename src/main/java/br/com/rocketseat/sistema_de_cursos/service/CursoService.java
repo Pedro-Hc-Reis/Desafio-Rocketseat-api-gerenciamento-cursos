@@ -23,6 +23,10 @@ public class CursoService {
         return cursoRepository.findAll ( );
     }
 
+    public Curso findById ( Long id ) {
+        return cursoRepository.findById ( id ).orElse ( null );
+    }
+
     public List<Curso> findByName ( String name ) {
         return cursoRepository.findByNameContainingIgnoreCase ( name );
     }
@@ -45,6 +49,10 @@ public class CursoService {
 
         if ( updatedCurso.getCategory ( ) != null ) {
             curso.setCategory ( updatedCurso.getCategory ( ) );
+        }
+
+        if ( updatedCurso.getTeacher ( ) != null ) {
+            curso.setTeacher ( updatedCurso.getTeacher ( ) );
         }
 
         return cursoRepository.save ( curso );

@@ -5,6 +5,7 @@ import br.com.rocketseat.sistema_de_cursos.model.Curso;
 import br.com.rocketseat.sistema_de_cursos.service.CursoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,35 +19,39 @@ public class CursoController {
 
     @PostMapping
     public Curso create ( @Valid @RequestBody CursoDTO cursoDTO ) {
-        Curso curso = new Curso ( );
-        curso.setName ( cursoDTO.getName ( ) );
-        curso.setCategory ( cursoDTO.getCategory ( ) );
+        Curso curso = Curso.builder ( )
+                .name ( cursoDTO.getName ( ) )
+                .category ( cursoDTO.getCategory ( ) )
+                .teacher ( cursoDTO.getTeacher ( ) )
+                .build ( );
         return cursoService.create ( curso );
     }
 
     @GetMapping
-    public List<Curso> findAll ( ) {
-        return cursoService.findAll ( );
+    public ResponseEntity<List<Curso>> findAll ( @RequestParam ( required = false ) String name ,
+                                                 @RequestParam ( required = false ) String category ) {
+        if ( name != null && category != null ) {
+            return ResponseEntity.ok ( cursoService.findByNameAndCategory ( name , category ) );
+        } else if ( name != null ) {
+            return ResponseEntity.ok ( cursoService.findByName ( name ) );
+        } else if ( category != null ) {
+            return ResponseEntity.ok ( cursoService.findByCategory ( category ) );
+        }
+        return ResponseEntity.ok ( cursoService.findAll ( ) );
     }
 
-    @GetMapping ( "/search" )
-    public List<Curso> search ( @RequestParam ( required = false ) String name ,
-                                @RequestParam ( required = false ) String category ) {
-        if ( name != null && category != null ) {
-            return cursoService.findByNameAndCategory ( name , category );
-        } else if ( name != null ) {
-            return cursoService.findByName ( name );
-        } else if ( category != null ) {
-            return cursoService.findByCategory ( category );
-        }
-        return cursoService.findAll ( );
+    @GetMapping ( "/{id}" )
+    public ResponseEntity<Curso> get ( @PathVariable String id ) {
+        var result = cursoService.findById ( Long.valueOf ( id ) );
+        return result != null ? ResponseEntity.ok ( result ) : ResponseEntity.noContent ( ).build ( );
     }
 
     @PutMapping ( "/{id}" )
-    public Curso update ( @PathVariable Long id , @RequestBody CursoDTO cursoDTO ) {
+    public Curso update ( @PathVariable Long id , @Valid @RequestBody CursoDTO cursoDTO ) {
         Curso curso = new Curso ( );
         curso.setName ( cursoDTO.getName ( ) );
         curso.setCategory ( cursoDTO.getCategory ( ) );
+        curso.setTeacher ( cursoDTO.getTeacher ( ) );
         return cursoService.update ( id , curso );
     }
 
